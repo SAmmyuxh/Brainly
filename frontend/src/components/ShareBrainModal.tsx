@@ -28,7 +28,7 @@ export function ShareBrainModal({ open, onOpenChange }: ShareBrainModalProps) {
                 }
             });
             const hash = response.data.hash;
-            setShareUrl(`http://localhost:5173/share/${hash}`);
+            setShareUrl(`${window.location.origin}/share/${hash}`);
             toast.success("Share link generated!");
         } catch (e) {
             toast.error("Error generating share link");
