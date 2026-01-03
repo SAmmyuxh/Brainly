@@ -28,7 +28,7 @@ export function Home() {
                 {floatingItems.map((item, i) => (
                     <div
                         key={i}
-                        className={`absolute ${item.color} opacity-30`}
+                        className={`absolute ${item.color} opacity-20 sm:opacity-30`}
                         style={{
                             left: `${item.x}%`,
                             top: `${item.y}%`,
@@ -36,13 +36,13 @@ export function Home() {
                             animationDelay: `${item.delay}s`
                         }}
                     >
-                        <item.icon className="w-12 h-12" />
+                        <item.icon className="w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12" />
                     </div>
                 ))}
             </div>
 
             {/* Subtle background pattern */}
-            <div className="fixed inset-0 opacity-70 pointer-events-none" style={{
+            <div className="fixed inset-0 opacity-50 sm:opacity-70 pointer-events-none" style={{
                 backgroundImage: `radial-gradient(circle at 2px 2px, rgb(209 213 219) 1px, transparent 0)`,
                 backgroundSize: '40px 40px'
             }}></div>
@@ -66,20 +66,29 @@ export function Home() {
 
             {/* Navigation */}
             <nav className="relative border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <div className="p-2 rounded-lg bg-indigo-600">
-                            <Brain className="w-5 h-5 text-white" />
+                <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-indigo-600">
+                            <Brain className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                         </div>
-                        <span className="text-lg sm:text-xl font-semibold text-gray-900">
+                        <span className="text-base sm:text-lg md:text-xl font-semibold text-gray-900">
                             Brainly
                         </span>
                     </div>
-                    <div className="flex items-center gap-2 sm:gap-3">
-                        <Button variant="ghost" className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 text-sm sm:text-base" onClick={() => navigate('/signin')}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+                        <Button 
+                            variant="ghost" 
+                            size="sm"
+                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 text-xs sm:text-sm md:text-base px-2 sm:px-3 md:px-4 h-8 sm:h-9 md:h-10" 
+                            onClick={() => navigate('/signin')}
+                        >
                             Sign In
                         </Button>
-                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm sm:text-base" onClick={() => navigate('/signup')}>
+                        <Button 
+                            size="sm"
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm md:text-base px-2.5 sm:px-3 md:px-4 whitespace-nowrap h-8 sm:h-9 md:h-10" 
+                            onClick={() => navigate('/signup')}
+                        >
                             Get Started
                         </Button>
                     </div>
@@ -87,64 +96,73 @@ export function Home() {
             </nav>
 
             {/* Hero Section */}
-            <div className="relative max-w-6xl mx-auto px-6 pt-16 pb-20">
-                <div className="text-center max-w-3xl mx-auto space-y-8">
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 md:pt-16 pb-12 sm:pb-16 md:pb-20">
+                <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6 md:space-y-8">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200">
-                        <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-                        <span className="text-sm font-medium text-indigo-700">
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-indigo-50 border border-indigo-200">
+                        <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-600" />
+                        <span className="text-xs sm:text-sm font-medium text-indigo-700">
                             V2.0 is now live
                         </span>
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight px-2">
                         Your Second Brain for<br />
                         <span className="text-indigo-600">Digital Chaos</span>
                     </h1>
 
                     {/* Subheading */}
-                    <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-4">
                         Aggregate tweets, videos, and articles in one intelligent space. Brainly uses AI to organize your digital life so you never lose a great idea again.
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-5 text-base shadow-lg shadow-indigo-600/20 hover:shadow-xl hover:shadow-indigo-600/30 transition-all" onClick={() => navigate('/signup')}>
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 px-4">
+                        <Button 
+                            size="lg"
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 sm:px-6 py-4 sm:py-5 text-sm sm:text-base shadow-lg shadow-indigo-600/20 hover:shadow-xl hover:shadow-indigo-600/30 transition-all w-full sm:w-auto" 
+                            onClick={() => navigate('/signup')}
+                        >
                             Start for Free
                             <ChevronRight className="w-4 h-4 ml-1" />
                         </Button>
-                        <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-6 py-5 text-base" onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <Button 
+                            variant="outline" 
+                            size="lg"
+                            className="border-gray-300 text-gray-700 hover:bg-gray-50 px-5 sm:px-6 py-4 sm:py-5 text-sm sm:text-base w-full sm:w-auto" 
+                            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
                             See how it works
                         </Button>
                     </div>
 
                     {/* Social Proof */}
-                    <div className="flex items-center justify-center gap-6 pt-4 text-sm text-gray-500">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 pt-2 sm:pt-4 text-xs sm:text-sm text-gray-500 px-4">
                         <div className="flex items-center gap-1">
-                            <Check className="w-4 h-4 text-green-600" />
+                            <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-600" />
                             <span>No credit card required</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Check className="w-4 h-4 text-green-600" />
+                            <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-600" />
                             <span>Free forever plan</span>
                         </div>
                     </div>
 
                     {/* Hero Image */}
-                    <div className="mt-12 rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl">
-                        <div className="aspect-video rounded-xl bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border border-gray-200 flex items-center justify-center overflow-hidden relative">
+                    <div className="mt-8 sm:mt-10 md:mt-12 rounded-xl sm:rounded-2xl border border-gray-200 bg-white p-2 sm:p-3 md:p-4 shadow-xl sm:shadow-2xl">
+                        <div className="aspect-video rounded-lg sm:rounded-xl bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border border-gray-200 flex items-center justify-center overflow-hidden relative">
                             {/* Mock UI elements */}
-                            <div className="absolute inset-0 p-8">
-                                <div className="h-full w-full bg-white rounded-lg shadow-sm p-6 flex flex-col gap-4">
-                                    <div className="flex gap-3">
-                                        <div className="flex-1 h-10 bg-gray-100 rounded-lg"></div>
-                                        <div className="w-32 h-10 bg-indigo-100 rounded-lg"></div>
+                            <div className="absolute inset-0 p-3 sm:p-6 md:p-8">
+                                <div className="h-full w-full bg-white rounded-md sm:rounded-lg shadow-sm p-3 sm:p-4 md:p-6 flex flex-col gap-2 sm:gap-3 md:gap-4">
+                                    <div className="flex gap-2 sm:gap-3">
+                                        <div className="flex-1 h-6 sm:h-8 md:h-10 bg-gray-100 rounded-md sm:rounded-lg"></div>
+                                        <div className="w-20 sm:w-24 md:w-32 h-6 sm:h-8 md:h-10 bg-indigo-100 rounded-md sm:rounded-lg"></div>
                                     </div>
-                                    <div className="grid grid-cols-3 gap-4 flex-1">
-                                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg"></div>
-                                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg"></div>
-                                        <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg"></div>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 flex-1">
+                                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-md sm:rounded-lg"></div>
+                                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-md sm:rounded-lg"></div>
+                                        <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-md sm:rounded-lg hidden sm:block"></div>
                                     </div>
                                 </div>
                             </div>
@@ -154,34 +172,34 @@ export function Home() {
             </div>
 
             {/* Stats Section */}
-            <div className="relative max-w-6xl mx-auto px-6 py-16">
-                <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 md:py-16">
+                <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 text-center">
                     {[
                         { number: "50K+", label: "Active Users" },
                         { number: "2M+", label: "Items Saved" },
                         { number: "99.9%", label: "Uptime" }
                     ].map((stat, i) => (
-                        <div key={i} className="space-y-1">
-                            <div className="text-4xl font-bold text-indigo-600">{stat.number}</div>
-                            <div className="text-sm text-gray-600">{stat.label}</div>
+                        <div key={i} className="space-y-0.5 sm:space-y-1">
+                            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-600">{stat.number}</div>
+                            <div className="text-xs sm:text-sm text-gray-600">{stat.label}</div>
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* Features Grid */}
-            <div id="features" className="relative bg-white py-20">
-                <div className="max-w-6xl mx-auto px-6">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-3">
+            <div id="features" className="relative bg-white py-12 sm:py-16 md:py-20">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="text-center mb-8 sm:mb-10 md:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 px-4">
                             Everything you need to stay organized
                         </h2>
-                        <p className="text-lg text-gray-600">
+                        <p className="text-base sm:text-lg text-gray-600 px-4">
                             Powerful features that work together seamlessly
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 mb-16">
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-10 sm:mb-12 md:mb-16">
                         {[
                             {
                                 icon: Zap,
@@ -204,21 +222,21 @@ export function Home() {
                         ].map((feature, i) => (
                             <div
                                 key={i}
-                                className="bg-white rounded-xl border border-gray-200 p-8 hover:shadow-lg hover:border-gray-300 transition-all duration-200"
+                                className="bg-white rounded-lg sm:rounded-xl border border-gray-200 p-5 sm:p-6 md:p-8 hover:shadow-lg hover:border-gray-300 transition-all duration-200"
                             >
-                                <div className={`inline-flex p-3 rounded-lg mb-4 ${feature.color === 'indigo' ? 'bg-indigo-100' :
+                                <div className={`inline-flex p-2 sm:p-3 rounded-lg mb-3 sm:mb-4 ${feature.color === 'indigo' ? 'bg-indigo-100' :
                                     feature.color === 'blue' ? 'bg-blue-100' :
                                         'bg-green-100'
                                     }`}>
-                                    <feature.icon className={`w-6 h-6 ${feature.color === 'indigo' ? 'text-indigo-600' :
+                                    <feature.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${feature.color === 'indigo' ? 'text-indigo-600' :
                                         feature.color === 'blue' ? 'text-blue-600' :
                                             'text-green-600'
                                         }`} />
                                 </div>
-                                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1.5 sm:mb-2">
                                     {feature.title}
                                 </h3>
-                                <p className="text-gray-600 leading-relaxed">
+                                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                                     {feature.desc}
                                 </p>
                             </div>
@@ -226,22 +244,22 @@ export function Home() {
                     </div>
 
                     {/* Additional Features */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
                         {[
                             { icon: BookmarkPlus, title: "Quick Save", desc: "Save from anywhere with browser extension" },
                             { icon: Search, title: "Smart Search", desc: "Find anything with AI-powered search" },
                             { icon: Tag, title: "Auto-Tagging", desc: "Intelligent categorization" },
                             { icon: Clock, title: "Reading List", desc: "Save for later with reminders" }
                         ].map((item, i) => (
-                            <div key={i} className="flex gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div key={i} className="flex gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg hover:bg-gray-50 transition-colors">
                                 <div className="flex-shrink-0">
-                                    <div className="p-2 rounded-lg bg-gray-100">
-                                        <item.icon className="w-5 h-5 text-gray-700" />
+                                    <div className="p-1.5 sm:p-2 rounded-lg bg-gray-100">
+                                        <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                                     </div>
                                 </div>
-                                <div>
-                                    <h4 className="font-medium text-gray-900 mb-1">{item.title}</h4>
-                                    <p className="text-sm text-gray-600">{item.desc}</p>
+                                <div className="min-w-0">
+                                    <h4 className="font-medium text-sm sm:text-base text-gray-900 mb-0.5 sm:mb-1">{item.title}</h4>
+                                    <p className="text-xs sm:text-sm text-gray-600">{item.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -250,21 +268,30 @@ export function Home() {
             </div>
 
             {/* CTA Section */}
-            <div className="relative py-20">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-                    <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-12 shadow-2xl">
-                        <h2 className="text-3xl font-bold text-white mb-4">
+            <div className="relative py-12 sm:py-16 md:py-20">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                    <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl sm:rounded-2xl p-8 sm:p-10 md:p-12 shadow-xl sm:shadow-2xl">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 px-2">
                             Ready to organize your digital life?
                         </h2>
-                        <p className="text-indigo-100 text-lg mb-8">
+                        <p className="text-indigo-100 text-base sm:text-lg mb-6 sm:mb-8 px-2">
                             Join thousands of users who've already transformed how they save and organize content.
                         </p>
-                        <div className="flex items-center justify-center gap-4">
-                            <Button className="bg-white text-indigo-600 hover:bg-gray-50 px-8 py-5 text-base shadow-lg" onClick={() => navigate('/signup')}>
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
+                            <Button 
+                                size="lg"
+                                className="bg-white text-indigo-600 hover:bg-gray-50 px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base shadow-lg w-full sm:w-auto" 
+                                onClick={() => navigate('/signup')}
+                            >
                                 Get Started Free
                                 <ChevronRight className="w-4 h-4 ml-1" />
                             </Button>
-                            <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-5 text-base" onClick={() => window.location.href = 'mailto:sales@brainly.com'}>
+                            <Button 
+                                variant="outline" 
+                                size="lg"
+                                className="border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base w-full sm:w-auto" 
+                                onClick={() => window.location.href = 'mailto:sales@brainly.com'}
+                            >
                                 Contact Sales
                             </Button>
                         </div>

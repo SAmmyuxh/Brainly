@@ -23,6 +23,7 @@ export function Dashboard() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false)
   const [debouncedSearch, setDebouncedSearch] = useState("")
   const [editContent, setEditContent] = useState(null)
+  const [showMobileSearch, setShowMobileSearch] = useState(false)
   const queryClient = useQueryClient();
   const location = useLocation();
   const { toggleFavorite, moveToFolder, folders } = useFolders();
@@ -123,30 +124,30 @@ export function Dashboard() {
     return (
       <div className="flex h-screen bg-background text-foreground font-sans overflow-hidden">
         <Sidebar />
-        <div className="flex-1 flex flex-col ml-64 transition-all duration-300">
-          <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-background/50 backdrop-blur-md sticky top-0 z-10">
-            <div className="h-7 w-32 bg-muted animate-pulse rounded" />
-            <div className="flex-1 max-w-xl mx-8 hidden md:block">
-              <div className="h-10 bg-muted animate-pulse rounded-md" />
+        <div className="flex-1 flex flex-col md:ml-64 ml-0 transition-all duration-300">
+          <header className="h-14 sm:h-16 border-b border-border flex items-center justify-between px-3 sm:px-4 md:px-6 bg-background/50 backdrop-blur-md sticky top-0 z-10">
+            <div className="h-6 sm:h-7 w-24 sm:w-32 bg-muted animate-pulse rounded" />
+            <div className="flex-1 max-w-xl mx-4 md:mx-8 hidden md:block">
+              <div className="h-9 sm:h-10 bg-muted animate-pulse rounded-md" />
             </div>
-            <div className="flex items-center gap-4">
-              <div className="h-10 w-10 bg-muted animate-pulse rounded-md" />
-              <div className="h-10 w-28 bg-muted animate-pulse rounded-md" />
-              <div className="h-10 w-32 bg-muted animate-pulse rounded-md" />
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 sm:h-10 sm:w-10 bg-muted animate-pulse rounded-md" />
+              <div className="h-8 w-8 sm:h-10 sm:w-24 md:w-28 bg-muted animate-pulse rounded-md" />
+              <div className="h-8 w-8 sm:h-10 sm:w-24 md:w-32 bg-muted animate-pulse rounded-md" />
             </div>
           </header>
-          <main className="flex-1 overflow-y-auto p-8 bg-secondary/5">
-            <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 w-full max-w-7xl mx-auto">
+          <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 lg:p-8 bg-secondary/5">
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 md:gap-6 space-y-3 sm:space-y-4 md:space-y-6 w-full max-w-7xl mx-auto">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="break-inside-avoid mb-6 rounded-lg border bg-card p-4 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-md bg-muted animate-pulse" />
-                    <div className="h-5 w-3/4 bg-muted animate-pulse rounded" />
+                <div key={i} className="break-inside-avoid mb-3 sm:mb-4 md:mb-6 rounded-lg border bg-card p-3 sm:p-4 space-y-3 sm:space-y-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-md bg-muted animate-pulse" />
+                    <div className="h-4 sm:h-5 w-3/4 bg-muted animate-pulse rounded" />
                   </div>
-                  <div className="h-32 w-full rounded-md bg-muted animate-pulse" />
+                  <div className="h-24 sm:h-32 w-full rounded-md bg-muted animate-pulse" />
                   <div className="flex gap-2">
-                    <div className="h-6 w-16 rounded-full bg-muted animate-pulse" />
-                    <div className="h-6 w-20 rounded-full bg-muted animate-pulse" />
+                    <div className="h-5 sm:h-6 w-12 sm:w-16 rounded-full bg-muted animate-pulse" />
+                    <div className="h-5 sm:h-6 w-16 sm:w-20 rounded-full bg-muted animate-pulse" />
                   </div>
                 </div>
               ))}
@@ -163,40 +164,80 @@ export function Dashboard() {
       <Sidebar />
       <div className="flex-1 flex flex-col md:ml-64 ml-0 transition-all duration-300">
         {/* Header */}
-        <header className="h-16 border-b border-border flex items-center justify-between px-4 md:px-6 bg-background/50 backdrop-blur-md sticky top-0 z-10">
-          <div className="flex items-center gap-2">
-            <MobileSidebar />
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight truncate max-w-[150px] md:max-w-none">{getTitle()}</h2>
+        <header className="min-h-14 sm:min-h-16 border-b border-border flex flex-col bg-background/50 backdrop-blur-md sticky top-0 z-10">
+          <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 h-14 sm:h-16">
+            <div className="flex items-center gap-2 min-w-0 flex-1 md:flex-initial">
+              <MobileSidebar />
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight truncate">{getTitle()}</h2>
+            </div>
+
+            {/* Desktop Search */}
+            <div className="flex-1 max-w-xl mx-4 md:mx-8 relative hidden md:block">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search your brain..."
+                className="w-full pl-10 bg-secondary/50 border-input focus:border-primary"
+              />
+            </div>
+
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Mobile Search Toggle */}
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="md:hidden"
+                onClick={() => setShowMobileSearch(!showMobileSearch)}
+              >
+                <Search className="w-4 h-4" />
+              </Button>
+              
+              <ModeToggle />
+              
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="gap-1.5 sm:gap-2 border-primary/20 text-primary hover:bg-primary/10 h-8 sm:h-10" 
+                onClick={() => setIsShareModalOpen(true)}
+              >
+                <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden lg:inline text-sm">Share Brain</span>
+              </Button>
+              
+              <Button 
+                size="sm"
+                className="gap-1.5 sm:gap-2 bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 h-8 sm:h-10" 
+                onClick={() => setIsCreateModalOpen(true)}
+              >
+                <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline text-sm">Add Content</span>
+              </Button>
+            </div>
           </div>
 
-          <div className="flex-1 max-w-xl mx-4 md:mx-8 relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search your brain..."
-              className="w-full pl-10 bg-secondary/50 border-input focus:border-primary"
-            />
-          </div>
-
-          <div className="flex items-center gap-4">
-            <ModeToggle />
-            <Button variant="outline" className="gap-2 border-primary/20 text-primary hover:bg-primary/10" onClick={() => setIsShareModalOpen(true)}>
-              <Share2 className="w-4 h-4" />
-              Share Brain
-            </Button>
-            <Button className="gap-2 bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20" onClick={() => setIsCreateModalOpen(true)}>
-              <Plus className="w-4 h-4" />
-              Add Content
-            </Button>
-          </div>
+          {/* Mobile Search Bar */}
+          {showMobileSearch && (
+            <div className="px-3 sm:px-4 pb-3 md:hidden border-t border-border/50 pt-3 bg-background">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search your brain..."
+                  className="w-full pl-10 bg-secondary/50 border-input focus:border-primary"
+                  autoFocus
+                />
+              </div>
+            </div>
+          )}
         </header>
 
         {/* Content Grid */}
-        <main className="flex-1 overflow-y-auto p-8 bg-secondary/5">
-          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 w-full max-w-7xl mx-auto">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 lg:p-8 bg-secondary/5">
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 md:gap-6 space-y-3 sm:space-y-4 md:space-y-6 w-full max-w-7xl mx-auto">
             {filteredContents.map((content: any, i: number) => (
-              <div key={content._id || i} className="break-inside-avoid mb-6">
+              <div key={content._id || i} className="break-inside-avoid mb-3 sm:mb-4 md:mb-6">
                 <ContentCard
                   id={content._id}
                   title={content.title}
@@ -238,29 +279,31 @@ export function Dashboard() {
               </div>
             ))}
           </div>
+          
           {filteredContents.length === 0 && (
-            <div className="text-center text-muted-foreground py-20 w-full">
-              No content found. Add some tweets or videos to get started!
+            <div className="text-center text-muted-foreground py-12 sm:py-16 md:py-20 w-full px-4">
+              <p className="text-sm sm:text-base">No content found. Add some tweets or videos to get started!</p>
             </div>
           )}
 
           {/* Load More Button */}
           {hasNextPage && filteredContents.length > 0 && (
-            <div className="flex flex-col items-center gap-2 py-8">
+            <div className="flex flex-col items-center gap-2 py-6 sm:py-8">
               <Button
                 variant="outline"
+                size="sm"
                 onClick={() => fetchNextPage()}
                 disabled={isFetchingNextPage}
                 className="gap-2"
               >
                 {isFetchingNextPage ? (
-                  <><Loader2 className="w-4 h-4 animate-spin" /> Loading more...</>
+                  <><Loader2 className="w-4 h-4 animate-spin" /> <span className="text-sm">Loading more...</span></>
                 ) : (
-                  <>Load More</>
+                  <span className="text-sm">Load More</span>
                 )}
               </Button>
               {pagination && (
-                <span className="text-sm text-muted-foreground">
+                <span className="text-xs sm:text-sm text-muted-foreground">
                   Showing {contents.length} of {pagination.total} items
                 </span>
               )}
