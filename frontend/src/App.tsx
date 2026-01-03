@@ -9,14 +9,25 @@ import { SharedBrain } from "@/pages/SharedBrain"
 import { Home } from "@/pages/Home"
 import { TagsPage } from "@/pages/TagsPage"
 import { ProtectedRoute } from "@/components/ProtectedRoute"
+import { PublicRoute } from "@/components/PublicRoute"
 
 function App() {
+  const isAuthenticated = () => !!localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/" element={isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Home />} />
+        <Route path="/signup" element={
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        } />
+        <Route path="/signin" element={
+          <PublicRoute>
+            <Signin />
+          </PublicRoute>
+        } />
 
         {/* Protected Routes */}
         <Route path="/dashboard/tags" element={

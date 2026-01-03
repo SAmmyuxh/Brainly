@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Brain, Share2, Zap, Shield, ChevronRight, Check, BookmarkPlus, Search, Sparkles,  Clock, Tag, FileText, Video, Twitter, Bookmark } from "lucide-react"
+import { Brain, Share2, Zap, Shield, ChevronRight, Check, BookmarkPlus, Search, Sparkles, Clock, Tag, FileText, Video, Twitter, Bookmark } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -66,20 +66,20 @@ export function Home() {
 
             {/* Navigation */}
             <nav className="relative border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <div className="p-2 rounded-lg bg-indigo-600">
                             <Brain className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-xl font-semibold text-gray-900">
+                        <span className="text-lg sm:text-xl font-semibold text-gray-900">
                             Brainly
                         </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                        <Button variant="ghost" className="text-gray-700 hover:text-gray-900 hover:bg-gray-100" onClick={() => navigate('/signin')}>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        <Button variant="ghost" className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 text-sm sm:text-base" onClick={() => navigate('/signin')}>
                             Sign In
                         </Button>
-                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white" onClick={() => navigate('/signup')}>
+                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm sm:text-base" onClick={() => navigate('/signup')}>
                             Get Started
                         </Button>
                     </div>
@@ -98,18 +98,18 @@ export function Home() {
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                         Your Second Brain for<br />
                         <span className="text-indigo-600">Digital Chaos</span>
                     </h1>
 
                     {/* Subheading */}
-                    <p className="text-xl text-gray-600 leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
                         Aggregate tweets, videos, and articles in one intelligent space. Brainly uses AI to organize your digital life so you never lose a great idea again.
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex items-center justify-center gap-4 pt-2">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                         <Button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-5 text-base shadow-lg shadow-indigo-600/20 hover:shadow-xl hover:shadow-indigo-600/30 transition-all" onClick={() => navigate('/signup')}>
                             Start for Free
                             <ChevronRight className="w-4 h-4 ml-1" />
