@@ -4,8 +4,8 @@ Brainly is a powerful **Second Brain** application designed to help you capture,
 
 Built with a focus on simplicity and intelligence, Brainly integrates **Google Gemini AI** to let you chat with your own stored content, making it not just a storage locker, but an active partner in your thinking process.
 
-![Brainly Dashboard](<img width="1915" height="872" alt="image" src="https://github.com/user-attachments/assets/bb525875-6b62-490e-b386-bf5f2128779f" />
-)
+![Brainly Dashboard](https://github.com/user-attachments/assets/bb525875-6b62-490e-b386-bf5f2128779f)
+
 
 ## 🚀 Features
 
